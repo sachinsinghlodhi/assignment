@@ -1,0 +1,257 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://builtwith.com/techDataExample.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "D": "example.com",
+            "SP": 0,
+            "SD": "sub.example.com",
+            "FI": "2018-09-24",
+            "LI": "2019-09-03",
+            "T": [
+                {
+                    "N": "Angular JS",
+                    "FD": "2018-09-24",
+                    "LD": "2019-06-03"
+                },
+                {
+                    "N": "Content Delivery Network",
+                    "FD": "2018-09-24",
+                    "LD": "2019-06-03"
+                },
+                {
+                    "N": "jQuery",
+                    "FD": "2018-09-24",
+                    "LD": "2019-04-17"
+                },
+                {
+                    "N": "jQuery UI",
+                    "FD": "2018-09-24",
+                    "LD": "2019-04-17"
+                },
+                {
+                    "N": "Font Awesome",
+                    "FD": "2018-09-24",
+                    "LD": "2018-10-04"
+                },
+                {
+                    "N": "jQuery Marquee",
+                    "FD": "2018-09-24",
+                    "LD": "2019-04-17"
+                },
+                {
+                    "N": "SignalR",
+                    "FD": "2018-09-24",
+                    "LD": "2019-04-17"
+                },
+                {
+                    "N": "html5shiv",
+                    "FD": "2018-09-24",
+                    "LD": "2019-06-03"
+                },
+                {
+                    "N": "CNZZ",
+                    "FD": "2018-09-24",
+                    "LD": "2019-04-17"
+                },
+                {
+                    "N": "Provide Support",
+                    "FD": "2018-09-24",
+                    "LD": "2019-04-17"
+                },
+                {
+                    "N": "Cloudflare DNS",
+                    "FD": "2018-10-04",
+                    "LD": "2019-07-11"
+                },
+                {
+                    "N": "GoDaddy",
+                    "FD": "2019-08-25",
+                    "LD": "2019-08-25"
+                },
+                {
+                    "N": "GoDaddy DNS",
+                    "FD": "2019-08-25",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "New Relic",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "Viewport Meta",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "IPhone / Mobile Compatible",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "GoDaddy Parking",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "IIS",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "IIS 7",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "ASP.NET",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                },
+                {
+                    "N": "ASP.NET 4.0",
+                    "FD": "2019-09-03",
+                    "LD": "2019-09-03"
+                }
+            ]
+        }
+    ],
+    "required": [
+        "D",
+        "SP",
+        "FI",
+        "LI",
+        "T"
+    ],
+    "properties": {
+        "D": {
+            "$id": "#/properties/D",
+            "type": "string",
+            "title": "Root Domain",
+            "description": "The root domain (our key field)",
+            "default": "",
+            "examples": [
+                "example.com"
+            ]
+        },
+        "SP": {
+            "$id": "#/properties/SP",
+            "type": "integer",
+            "title": "Technology Spend",
+            "description": "How much a website is spending on web technology per month in USD",
+            "default": 0,
+            "examples": [
+                0,12,324,3232
+            ]
+        },
+        "SD": {
+            "default": "",
+            "description": "Subdomain or internal page where the technology was detected with /* meaning internal page",
+            "examples": [
+                "sub.example.com","example.com/*",null
+            ],
+            "title": "The SD schema"
+        },
+        "FI": {
+            "$id": "#/properties/FI",
+            "type": "string",
+            "title": "First Indexed Date",
+            "default": "",
+            "examples": [
+                "2018-09-24"
+            ]
+        },
+        "LI": {
+            "$id": "#/properties/LI",
+            "type": "string",
+            "title": "Last Indexed Date",
+            "description": "The date the entire record was last updated.",
+            "default": "",
+            "examples": [
+                "2019-09-03"
+            ]
+        },
+        "T": {
+            "$id": "#/properties/T",
+            "type": "array",
+            "title": "Technologies",
+            "description": "The list of technologies that are found on this specific D/SD combination",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "N": "Angular JS",
+                        "FD": "2018-09-24",
+                        "LD": "2019-06-03"
+                    },
+                    {
+                        "N": "Content Delivery Network",
+                        "FD": "2018-09-24",
+                        "LD": "2019-06-03"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/T/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/T/items/anyOf/0",
+                        "type": "object",
+                        "default": {},
+                        "examples": [
+                            {
+                                "N": "Angular JS",
+                                "FD": "2018-09-24",
+                                "LD": "2019-06-03"
+                            }
+                        ],
+                        "required": [
+                            "N",
+                            "FD",
+                            "LD"
+                        ],
+                        "properties": {
+                            "N": {
+                                "$id": "#/properties/T/items/anyOf/0/properties/N",
+                                "type": "string",
+                                "title": "Technology Name",
+                                "default": "",
+                                "examples": [
+                                    "Angular JS"
+                                ]
+                            },
+                            "FD": {
+                                "$id": "#/properties/T/items/anyOf/0/properties/FD",
+                                "type": "string",
+                                "title": "First Detected",
+                                "description": "The date we first detected the technology",
+                                "default": "",
+                                "examples": [
+                                    "2018-09-24"
+                                ]
+                            },
+                            "LD": {
+                                "$id": "#/properties/T/items/anyOf/0/properties/LD",
+                                "type": "string",
+                                "title": "Last Detected",
+                                "description": "The date we last detected the technology",
+                                "default": "",
+                                "examples": [
+                                    "2019-06-03"
+                                ]
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        }
+    },
+    "additionalProperties": true
+}

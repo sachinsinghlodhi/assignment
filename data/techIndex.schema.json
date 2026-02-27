@@ -1,0 +1,198 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://builtwith.com/techIndexExample.json",
+    "type": "array",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": [],
+    "examples": [
+        [
+            {
+                "Name": "Google Universal Analytics",
+                "Parent": "Google Analytics",
+                "Premium": "No",
+                "Description": "The analytics.js JavaScript snippet is a new way to measure how users interact with your website. It is similar to the previous Google tracking code, ga.js, but offers more flexibility for developers to customize their implementations.",
+                "Link": "https://developers.google.com/analytics/devguides/collection/analyticsjs/",
+                "TrendsLink": "//trends.builtwith.com/analytics/Google-Universal-Analytics",
+                "Category": "Analytics and Tracking",
+                "SubCategories": [],
+                "FirstAdded": "2014-01-02",
+                "Ticker": "",
+                "Exchange": "",
+                "PublicCompanyType": "",
+                "PublicCompanyName": ""
+            }
+        ]
+    ],
+    "additionalItems": true,
+    "items": {
+        "$id": "#/items",
+        "anyOf": [
+            {
+                "$id": "#/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "Name": "Google Universal Analytics",
+                        "Parent": "Google Analytics",
+                        "Premium": "No",
+                        "Description": "The analytics.js JavaScript snippet is a new way to measure how users interact with your website. It is similar to the previous Google tracking code, ga.js, but offers more flexibility for developers to customize their implementations.",
+                        "Link": "https://developers.google.com/analytics/devguides/collection/analyticsjs/",
+                        "TrendsLink": "//trends.builtwith.com/analytics/Google-Universal-Analytics",
+                        "Category": "Analytics and Tracking",
+                        "SubCategories": [],
+                        "FirstAdded": "2014-01-02",
+                        "Ticker": "",
+                        "Exchange": "",
+                        "PublicCompanyType": "",
+                        "PublicCompanyName": ""
+                    }
+                ],
+                "required": [
+                    "Name",
+                    "Premium",
+                    "Description",
+                    "Link",
+                    "TrendsLink",
+                    "Category",
+                    "FirstAdded",
+                ],
+                "properties": {
+                    "Name": {
+                        "$id": "#/items/anyOf/0/properties/Name",
+                        "type": "string",
+                        "title": "Name",
+                        "description": "Unique name of the technology",
+                        "default": "",
+                        "examples": [
+                            "Google Universal Analytics"
+                        ]
+                    },
+                    "Parent": {
+                        "$id": "#/items/anyOf/0/properties/Parent",
+                        "type": "string",
+                        "title": "Parent Technology",
+                        "description": "The technology parent (most don't have one)",
+                        "default": "",
+                        "examples": [
+                            "Google Analytics"
+                        ]
+                    },
+                    "Premium": {
+                        "$id": "#/items/anyOf/0/properties/Premium",
+                        "type": "string",
+                        "title": "Premium",
+                        "description": "If the technology is paid for or free or both (maybe).",
+                        "default": "",
+                        "examples": [
+                            "No","Maybe","Yes"
+                        ]
+                    },
+                    "Description": {
+                        "$id": "#/items/anyOf/0/properties/Description",
+                        "type": "string",
+                        "title": "Description",
+                        "default": "",
+                        "examples": [
+                            "The analytics.js JavaScript snippet is a new way to measure how users interact with your website. It is similar to the previous Google tracking code, ga.js, but offers more flexibility for developers to customize their implementations."
+                        ]
+                    },
+                    "Link": {
+                        "$id": "#/items/anyOf/0/properties/Link",
+                        "type": "string",
+                        "title": "Link",
+                        "default": "",
+                        "examples": [
+                            "https://developers.google.com/analytics/devguides/collection/analyticsjs/"
+                        ]
+                    },
+                    "TrendsLink": {
+                        "$id": "#/items/anyOf/0/properties/TrendsLink",
+                        "type": "string",
+                        "title": "TrendsLink",
+                        "description": "Link to our trends data",
+                        "default": "",
+                        "examples": [
+                            "//trends.builtwith.com/analytics/Google-Universal-Analytics"
+                        ]
+                    },
+                    "Category": {
+                        "$id": "#/items/anyOf/0/properties/Category",
+                        "type": "string",
+                        "title": "Category",
+                        "description": "Top level category of the technology.",
+                        "default": "",
+                        "examples": [
+                            "Analytics and Tracking"
+                        ]
+                    },
+                    "SubCategories": {
+                        "$id": "#/items/anyOf/0/properties/SubCategories",
+                        "type": "array",
+                        "title": "Subcategories",
+                        "description": "Any sub categories the technology may have",
+                        "default": [],
+                        "examples": [
+                            ["AB Testing"]
+                        ],
+                        "additionalItems": true,
+                        "items": {
+                            "$id": "#/items/anyOf/0/properties/SubCategories/items"
+                        }
+                    },
+                    "FirstAdded": {
+                        "$id": "#/items/anyOf/0/properties/FirstAdded",
+                        "type": "string",
+                        "title": "First Added",
+                        "description": "The date we added the technology to the tracking",
+                        "default": "",
+                        "examples": [
+                            "2014-01-02"
+                        ]
+                    },
+                    "Ticker": {
+                        "$id": "#/items/anyOf/0/properties/Ticker",
+                        "type": "string",
+                        "title": "Ticker",
+                        "description": "Public ticker for a technology if we have one.",
+                        "default": "",
+                        "examples": [
+                            "GOOG"
+                        ]
+                    },
+                    "Exchange": {
+                        "$id": "#/items/anyOf/0/properties/Exchange",
+                        "type": "string",
+                        "title": "Stock Market Exchange",
+                        "default": "",
+                        "examples": [
+                            "NYSE"
+                        ]
+                    },
+                    "PublicCompanyType": {
+                        "$id": "#/items/anyOf/0/properties/PublicCompanyType",
+                        "type": "string",
+                        "description": "If the business is web focused or more broad.",
+                        "default": "",
+                        "examples": [
+                            "WF"
+                        ]
+                    },
+                    "PublicCompanyName": {
+                        "$id": "#/items/anyOf/0/properties/PublicCompanyName",
+                        "type": "string",
+                        "title": "Public Company Name",
+                        "default": "",
+                        "examples": [
+                            "Alphabet Inc"
+                        ]
+                    }
+                },
+                "additionalProperties": true
+            }
+        ]
+    }
+}

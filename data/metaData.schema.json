@@ -1,0 +1,205 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://builtwith.com/metaDataExample.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "D": "builtwith.com",
+            "S": [
+                "https://twitter.com/builtwith",
+                "https://facebook.com/builtwith"
+            ],
+            "C": "Sydney",
+            "CAT": "Business And Industrial",
+            "ST": "NSW",
+            "CO": "AU",
+            "Z": "2000",
+            "CN": "BuiltWith Pty Ltd",
+            "T": [
+                "+61 1300 558 745"
+            ],
+            "P": [
+                {
+                    "Name": "Gary Brewer",
+                    "Title": "Founder"
+                }
+            ],
+            "E": [
+                "gary@builtwith.com"
+            ]
+        }
+    ],
+    "required": [
+        "D"
+    ],
+    "properties": {
+        "D": {
+            "$id": "#/properties/D",
+            "type": "string",
+            "title": "The Root Domain",
+            
+            "default": "",
+            "examples": [
+                "builtwith.com"
+            ]
+        },
+        "S": {
+            "$id": "#/properties/S",
+            "type": "array",
+            "title": "Social Links",
+            "description": "Social links for the company Facebook, LinkedIn etc..",
+            "default": [],
+            "examples": [
+                [
+                    "https://twitter.com/builtwith",
+                    "https://facebook.com/builtwith"
+                ]
+            ]
+        },
+        "C": {
+            "$id": "#/properties/C",
+            "type": "string",
+            "title": "City",
+            "default": "",
+            "examples": [
+                "Sydney"
+            ]
+        },
+        "CAT": {
+            "$id": "#/properties/CAT",
+            "type": "string",
+            "title": "Category",
+            "description": "IAB Top Level Category",
+            "default": "",
+            "examples": [
+                "Business And Industrial"
+            ]
+        },
+        "ST": {
+            "$id": "#/properties/ST",
+            "type": "string",
+            "title": "State / County",
+            "default": "",
+            "examples": [
+                "NSW"
+            ]
+        },
+        "CO": {
+            "$id": "#/properties/CO",
+            "type": "string",
+            "title": "Country",
+            "description": "Country code  (ISO 3166)",
+            "default": "",
+            "examples": [
+                "AU"
+            ]
+        },
+        "Z": {
+            "$id": "#/properties/Z",
+            "type": "string",
+            "title": "Zip / Postcode",
+            "default": "",
+            "examples": [
+                "2000"
+            ]
+        },
+        "CN": {
+            "$id": "#/properties/CN",
+            "type": "string",
+            "title": "Company Name",
+            "description": "The company name",
+            "default": "",
+            "examples": [
+                "BuiltWith Pty Ltd"
+            ]
+        },
+        "T": {
+            "$id": "#/properties/T",
+            "type": "array",
+            "title": "Telephones",
+            
+            "default": [],
+            "examples": [
+                [
+                    "+61 1300 558 745"
+                ]
+            ]
+        },
+        "P": {
+            "$id": "#/properties/P",
+            "type": "array",
+            "title": "People",
+            "description": "People names and titles",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "Name": "Gary Brewer",
+                        "Title": "Founder"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/P/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/P/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "default": {},
+                        "examples": [
+                            {
+                                "Name": "Gary Brewer",
+                                "Title": "Founder"
+                            }
+                        ],
+                        "required": [
+                            "Name",
+                            "Title"
+                        ],
+                        "properties": {
+                            "Name": {
+                                "$id": "#/properties/P/items/anyOf/0/properties/Name",
+                                "type": "string",
+                                "title": "Name",
+                                "description": "The persons full name",
+                                "default": "",
+                                "examples": [
+                                    "Gary Brewer"
+                                ]
+                            },
+                            "Title": {
+                                "$id": "#/properties/P/items/anyOf/0/properties/Title",
+                                "type": "string",
+                                "title": "Title",
+                                "description": "The persons business title",
+                                "default": "",
+                                "examples": [
+                                    "Founder"
+                                ]
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "E": {
+            "$id": "#/properties/E",
+            "type": "array",
+            "title": "Email",
+            "description": "Emails",
+            "default": [],
+            "examples": [
+                [
+                    "gary@builtwith.com"
+                ]
+            ]
+        }
+    },
+    "additionalProperties": true
+}
