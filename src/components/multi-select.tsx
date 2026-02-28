@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, ChevronsUpDown, X } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface MultiSelectProps {
@@ -63,7 +63,28 @@ export function MultiSelect({
 }: MultiSelectProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
 
   const toggle = (value: string) => {
     onChange(
@@ -86,9 +107,8 @@ export function MultiSelect({
         : `${selected.length} selected`;
 
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative">
       <button
-        ref={triggerRef}
         type="button"
         onClick={() => setOpen(!open)}
         aria-label={ariaLabel}

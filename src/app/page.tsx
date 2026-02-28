@@ -3,12 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ResultsTable } from "@/components/results-table";
 import { SearchSidebar } from "@/components/search-sidebar";
-import type {
-  CompanyResult,
-  FilterOption,
-  SearchFilters,
-  SearchResponse,
-} from "@/lib/types";
+import type { CompanyResult, FilterOption, SearchFilters } from "@/lib/types";
 
 function TableSkeleton() {
   return (
@@ -74,6 +69,7 @@ export default function Home() {
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [facets, setFacets] = useState(emptyFacets);
   const [currentFilters, setCurrentFilters] = useState<SearchFilters>({});
+  const [error, setError] = useState<string | null>(null);
 
   const doSearch = useCallback(
     async (
@@ -84,6 +80,7 @@ export default function Home() {
       sd: "asc" | "desc",
     ) => {
       setIsSearching(true);
+      setError(null);
       try {
         const body: SearchFilters = {
           ...filters,
@@ -97,12 +94,32 @@ export default function Home() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
-        if (!res.ok) throw new Error("Search failed");
-        const data: SearchResponse = await res.json();
-        setResults(data.results);
-        setTotal(data.total);
+        const text = await res.text();
+        let data: {
+          results?: CompanyResult[];
+          total?: number;
+          facets?: typeof emptyFacets;
+          message?: string;
+        };
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch {
+          data = {
+            message: res.ok ? "Invalid response" : text || "Search failed",
+          };
+        }
+        if (!res.ok) {
+          throw new Error(data?.message || "Search failed");
+        }
+        setResults(data.results ?? []);
+        setTotal(data.total ?? 0);
         if (data.facets) setFacets(data.facets);
       } catch (err) {
+        const message =
+          err instanceof Error
+            ? err.message
+            : "Search failed. Run npm run setup first.";
+        setError(message);
         console.error("Search error:", err);
       } finally {
         setIsSearching(false);
@@ -193,6 +210,11 @@ export default function Home() {
           </h1>
         </header>
         <main className="flex-1 overflow-auto p-6">
+          {error && (
+            <div className="mb-4 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
           {isSearching ? (
             <TableSkeleton />
           ) : (
