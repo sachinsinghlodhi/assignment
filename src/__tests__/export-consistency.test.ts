@@ -71,12 +71,17 @@ function toCsvFormat(data: Record<string, unknown>[]): string {
 }
 
 describe("JSON and CSV export consistency", () => {
-  const testFilters = { categories: ["Travel"] as const, countries: ["GB"] as const };
+  const testFilters = {
+    categories: ["Travel"] as const,
+    countries: ["GB"] as const,
+  };
 
   it("search returns same data as export source", () => {
     const jsonData = exportAllCompanies(testFilters);
     expect(jsonData.length).toBeGreaterThan(0);
-    expect(jsonData.every((r) => r.category === "Travel" && r.country === "GB")).toBe(true);
+    expect(
+      jsonData.every((r) => r.category === "Travel" && r.country === "GB"),
+    ).toBe(true);
   });
 
   it("JSON and CSV exports contain the same records", () => {
@@ -113,17 +118,16 @@ describe("JSON and CSV export consistency", () => {
       const j = jsonData[i];
       const c = csvParsed.find((row) => row.domain === j.domain);
       expect(c).toBeDefined();
-      expect(c!.domain).toBe(j.domain);
-      expect(c!.company_name).toBe(j.company_name);
-      expect(c!.category).toBe(j.category);
-      expect(c!.country).toBe(j.country);
-      expect(c!.city).toBe(j.city);
-      expect(c!.tech_spend).toBe(String(j.tech_spend));
-      expect(c!.total_technologies).toBe(String(j.total_technologies));
-      expect(c!.technologies).toBe(j.technologies.join("; "));
-      expect(c!.telephones).toBe(j.telephones.join("; "));
-      expect(c!.emails).toBe(j.emails.join("; "));
+      expect(c?.domain).toBe(j.domain);
+      expect(c?.company_name).toBe(j.company_name);
+      expect(c?.category).toBe(j.category);
+      expect(c?.country).toBe(j.country);
+      expect(c?.city).toBe(j.city);
+      expect(c?.tech_spend).toBe(String(j.tech_spend));
+      expect(c?.total_technologies).toBe(String(j.total_technologies));
+      expect(c?.technologies).toBe(j.technologies.join("; "));
+      expect(c?.telephones).toBe(j.telephones.join("; "));
+      expect(c?.emails).toBe(j.emails.join("; "));
     }
   });
-
 });

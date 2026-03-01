@@ -1,6 +1,6 @@
 "use client";
 
-import { RotateCcw, Save, Search } from "lucide-react";
+import { RotateCcw, Save, Search, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FilterOption, SearchFilters } from "@/lib/types";
 import { MultiSelect } from "./multi-select";
@@ -32,6 +32,8 @@ interface SearchSidebarProps {
   onSearch: (filters: SearchFilters) => void;
   onReset: () => void;
   isSearching: boolean;
+  onClose?: () => void;
+  showCloseButton?: boolean;
 }
 
 export function SearchSidebar({
@@ -39,6 +41,8 @@ export function SearchSidebar({
   onSearch,
   onReset,
   isSearching,
+  onClose,
+  showCloseButton,
 }: SearchSidebarProps) {
   const [filters, setFilters] = useState<SearchFilters>({ ...defaultFilters });
   const [message, setMessage] = useState("");
@@ -124,9 +128,21 @@ export function SearchSidebar({
       onSubmit={handleSubmit}
       className="flex h-full flex-col border-r border-gray-200 bg-white"
     >
-      <div className="flex items-center gap-2 border-b border-gray-200 px-4 py-3">
-        <Search className="h-5 w-5 text-indigo-600" />
-        <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
+      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-gray-200 px-4">
+        <div className="flex items-center gap-2">
+          <Search className="h-5 w-5 text-indigo-600" />
+          <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
+        </div>
+        {showCloseButton && onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded p-2 hover:bg-gray-100 md:hidden"
+            aria-label="Close filters"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-5">

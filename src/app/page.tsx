@@ -1,5 +1,6 @@
 "use client";
 
+import { Filter } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { ResultsTable } from "@/components/results-table";
 import { SearchSidebar } from "@/components/search-sidebar";
@@ -70,6 +71,7 @@ export default function Home() {
   const [facets, setFacets] = useState(emptyFacets);
   const [currentFilters, setCurrentFilters] = useState<SearchFilters>({});
   const [error, setError] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const doSearch = useCallback(
     async (
@@ -191,25 +193,53 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen min-h-0 bg-gray-50">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-80 shrink-0 overflow-hidden">
+      <aside
+        className={`
+          fixed inset-y-0 left-0 z-50 w-80 shrink-0 transform bg-white shadow-xl transition-transform duration-200 ease-out
+          md:relative md:translate-x-0 md:shadow-none
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}
+      >
         <SearchSidebar
           facets={facets}
-          onSearch={handleSearch}
+          onSearch={(f) => {
+            handleSearch(f);
+            setSidebarOpen(false);
+          }}
           onReset={handleReset}
           isSearching={isSearching}
+          onClose={() => setSidebarOpen(false)}
+          showCloseButton={sidebarOpen}
         />
       </aside>
 
       {/* Main content */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <header className="flex h-14 shrink-0 items-center border-b border-gray-200 bg-white px-6">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <header className="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 bg-white px-4 sm:px-6">
+          <button
+            type="button"
+            onClick={() => setSidebarOpen(true)}
+            className="rounded p-2 hover:bg-gray-100 md:hidden"
+            aria-label="Open filters"
+          >
+            <Filter className="h-5 w-5 text-gray-600" />
+          </button>
           <h1 className="text-lg font-semibold text-gray-900">
             BuiltWith Explorer
           </h1>
         </header>
-        <main className="flex-1 overflow-auto p-6">
+        <main className="min-h-0 flex-1 overflow-auto p-4 sm:p-6">
           {error && (
             <div className="mb-4 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
               {error}

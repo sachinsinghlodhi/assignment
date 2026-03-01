@@ -118,10 +118,10 @@ export function ResultsTable({
   return (
     <div className="flex h-full flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3">
-        <h2 className="text-xl font-bold text-gray-900">
+      <div className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-lg font-bold text-gray-900 sm:text-xl">
           Results{" "}
-          <span className="text-base font-normal text-gray-500">
+          <span className="text-sm font-normal text-gray-500 sm:text-base">
             ({total.toLocaleString()} total)
           </span>
         </h2>
@@ -149,8 +149,8 @@ export function ResultsTable({
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200">
+      <div className="flex-1 overflow-x-auto overflow-y-auto rounded-lg border border-gray-200">
+        <table className="min-w-[640px] divide-y divide-gray-200">
           <thead className="bg-gray-50 sticky top-0 z-10">
             <tr>
               <SortHeader col="domain">Domain</SortHeader>
@@ -256,7 +256,7 @@ export function ResultsTable({
 
       {/* Pagination */}
       {total > 0 && (
-        <div className="flex items-center justify-between pt-3 text-sm">
+        <div className="flex flex-col gap-3 pt-3 text-sm sm:flex-row sm:items-center sm:justify-between">
           <span className="text-gray-500">
             Showing{" "}
             <strong>
@@ -265,7 +265,7 @@ export function ResultsTable({
             </strong>{" "}
             of <strong>{total.toLocaleString()}</strong>
           </span>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <select
               value={pageSize}
               onChange={(e) => onPageSizeChange(Number(e.target.value))}
