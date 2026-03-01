@@ -145,7 +145,7 @@ export function SearchSidebar({
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-5">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 py-3 space-y-5">
         {/* Free-text search */}
         <label className="block">
           <span className="block text-sm font-medium text-gray-700 mb-1">
@@ -260,76 +260,94 @@ export function SearchSidebar({
               <legend className="block text-xs font-medium text-gray-600 mb-1">
                 Total Technologies
               </legend>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  aria-label="Minimum total technologies"
-                  value={filters.techCountMin || ""}
-                  onChange={(e) =>
-                    update(
-                      "techCountMin",
-                      e.target.value === "" ? 0 : Number(e.target.value),
-                    )
-                  }
-                  className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
-                />
-                <span className="text-gray-400 text-xs">to</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  aria-label="Maximum total technologies"
-                  value={
-                    filters.techCountMax === 10000
-                      ? ""
-                      : (filters.techCountMax ?? "")
-                  }
-                  onChange={(e) =>
-                    update(
-                      "techCountMax",
-                      e.target.value === "" ? 10000 : Number(e.target.value),
-                    )
-                  }
-                  className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
-                />
+              <div className="space-y-1.5">
+                <label className="flex items-center gap-2">
+                  <span className="w-8 shrink-0 text-xs text-gray-400">
+                    Min
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    aria-label="Minimum total technologies"
+                    value={filters.techCountMin || ""}
+                    onChange={(e) =>
+                      update(
+                        "techCountMin",
+                        e.target.value === "" ? 0 : Number(e.target.value),
+                      )
+                    }
+                    className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+                  />
+                </label>
+                <label className="flex items-center gap-2">
+                  <span className="w-8 shrink-0 text-xs text-gray-400">
+                    Max
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="10000"
+                    aria-label="Maximum total technologies"
+                    value={
+                      filters.techCountMax === 10000
+                        ? ""
+                        : (filters.techCountMax ?? "")
+                    }
+                    onChange={(e) =>
+                      update(
+                        "techCountMax",
+                        e.target.value === "" ? 10000 : Number(e.target.value),
+                      )
+                    }
+                    className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+                  />
+                </label>
               </div>
             </fieldset>
             <fieldset>
               <legend className="block text-xs font-medium text-gray-600 mb-1">
                 Tech Spend ($/month)
               </legend>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  aria-label="Minimum tech spend"
-                  value={filters.techSpendMin || ""}
-                  onChange={(e) =>
-                    update(
-                      "techSpendMin",
-                      e.target.value === "" ? 0 : Number(e.target.value),
-                    )
-                  }
-                  className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
-                />
-                <span className="text-gray-400 text-xs">to</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  aria-label="Maximum tech spend"
-                  value={
-                    filters.techSpendMax === 100000
-                      ? ""
-                      : (filters.techSpendMax ?? "")
-                  }
-                  onChange={(e) =>
-                    update(
-                      "techSpendMax",
-                      e.target.value === "" ? 100000 : Number(e.target.value),
-                    )
-                  }
-                  className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
-                />
+              <div className="space-y-1.5">
+                <label className="flex items-center gap-2">
+                  <span className="w-8 shrink-0 text-xs text-gray-400">
+                    Min
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    aria-label="Minimum tech spend"
+                    value={filters.techSpendMin || ""}
+                    onChange={(e) =>
+                      update(
+                        "techSpendMin",
+                        e.target.value === "" ? 0 : Number(e.target.value),
+                      )
+                    }
+                    className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+                  />
+                </label>
+                <label className="flex items-center gap-2">
+                  <span className="w-8 shrink-0 text-xs text-gray-400">
+                    Max
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="100000"
+                    aria-label="Maximum tech spend"
+                    value={
+                      filters.techSpendMax === 100000
+                        ? ""
+                        : (filters.techSpendMax ?? "")
+                    }
+                    onChange={(e) =>
+                      update(
+                        "techSpendMax",
+                        e.target.value === "" ? 100000 : Number(e.target.value),
+                      )
+                    }
+                    className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+                  />
+                </label>
               </div>
             </fieldset>
             <fieldset>
@@ -339,41 +357,48 @@ export function SearchSidebar({
               <p className="text-xs text-gray-400 mb-1">
                 e.g. &quot;2+ technologies in Advertising&quot;
               </p>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  placeholder="#"
-                  aria-label="Minimum technologies in category"
-                  className="w-16 rounded-md border border-gray-300 px-2 py-1.5 text-sm"
-                  value={filters.categoryTechFilter?.minCount || ""}
-                  onChange={(e) =>
-                    update("categoryTechFilter", {
-                      techCategory:
-                        filters.categoryTechFilter?.techCategory || "",
-                      minCount:
-                        e.target.value === "" ? 0 : Number(e.target.value),
-                    })
-                  }
-                />
-                <span className="text-gray-400 text-xs">in</span>
-                <select
-                  aria-label="Technology category"
-                  value={filters.categoryTechFilter?.techCategory || ""}
-                  onChange={(e) =>
-                    update("categoryTechFilter", {
-                      techCategory: e.target.value,
-                      minCount: filters.categoryTechFilter?.minCount || 0,
-                    })
-                  }
-                  className="flex-1 rounded-md border border-gray-300 px-2 py-1.5 text-sm"
-                >
-                  <option value="">Select category...</option>
-                  {facets.techCategories.map((tc) => (
-                    <option key={tc.value} value={tc.value}>
-                      {tc.label}
-                    </option>
-                  ))}
-                </select>
+              <div className="space-y-1.5">
+                <label className="flex items-center gap-2">
+                  <span className="w-8 shrink-0 text-xs text-gray-400">
+                    Min
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    aria-label="Minimum technologies in category"
+                    className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+                    value={filters.categoryTechFilter?.minCount || ""}
+                    onChange={(e) =>
+                      update("categoryTechFilter", {
+                        techCategory:
+                          filters.categoryTechFilter?.techCategory || "",
+                        minCount:
+                          e.target.value === "" ? 0 : Number(e.target.value),
+                      })
+                    }
+                  />
+                </label>
+                <label className="flex items-center gap-2">
+                  <span className="w-8 shrink-0 text-xs text-gray-400">In</span>
+                  <select
+                    aria-label="Technology category"
+                    value={filters.categoryTechFilter?.techCategory || ""}
+                    onChange={(e) =>
+                      update("categoryTechFilter", {
+                        techCategory: e.target.value,
+                        minCount: filters.categoryTechFilter?.minCount || 0,
+                      })
+                    }
+                    className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+                  >
+                    <option value="">Select category...</option>
+                    {facets.techCategories.map((tc) => (
+                      <option key={tc.value} value={tc.value}>
+                        {tc.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
             </fieldset>
           </div>

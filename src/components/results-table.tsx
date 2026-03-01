@@ -190,7 +190,10 @@ export function ResultsTable({
                   </td>
                   <td className="px-3 py-2 text-sm">
                     {c.category ? (
-                      <span className="inline-block rounded-full border border-gray-200 px-2 py-0.5 text-xs text-gray-600">
+                      <span
+                        title={c.category}
+                        className="inline-block max-w-[120px] truncate rounded-full border border-gray-200 px-2 py-0.5 text-xs text-gray-600"
+                      >
                         {c.category}
                       </span>
                     ) : (
